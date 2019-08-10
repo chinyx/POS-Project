@@ -1,4 +1,11 @@
 const page = new Page();
+const getData = function(){
+	return page.getData;
+}
+const setData = function(data){
+	return page.setData(data);
+}
+
 $('#headerImage').on('dblclick',async (e)=> {
 	let file = new openFile();
 	const callback = (url)=>{
@@ -7,8 +14,8 @@ $('#headerImage').on('dblclick',async (e)=> {
 			return;
 		}
 		console.log('url',url);
-		page.setData({
-			headerImage:url
+		setData({
+			headerImage:{src:url}
 		})
 	}
 	file.openFileToUrl(callback);
@@ -21,5 +28,5 @@ $('.input').change((e)=>{
 	let val_id = id.replace('Input','Value');
 	let data = {};
 	data[val_id]=val;
-	page.setData(data);
+	setData(data);
 });

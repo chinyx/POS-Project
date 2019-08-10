@@ -61,7 +61,7 @@
 			<tr class="w-auto d-block">
 				<td id="content" class="w-auto d-block">
 					<div class="container table-responsive">
-						<table id="lines" class="table table-bordered table-stripped">
+						<table id="lines" name="table" class="table table-bordered table-stripped">
 							<thead>
 								<tr>
 									<th style="width: 10%" scope="col">#</th>
@@ -73,6 +73,17 @@
 									<th style="width: 15%" scope="col">Amount</th>
 								</tr>
 							</thead>
+							<tbody>
+								<tr name="templateRow" class="">
+									<td>{seq}</td>
+									<td>{description}</td>
+									<td>{qty}</td>
+									<td>{uom}</td>
+									<td>{unitPrice}</td>
+									<td>{discount}</td>
+									<td>{amount}</td>
+								</tr>
+							</tbody>
 						</table>
 					</div>
 				</td>
@@ -81,7 +92,7 @@
 		<tfoot class="w-auto d-block">
 			<tr class="w-auto d-block">
 				<th id="footer">
-					
+					<p></p>
 				</th>
 			</tr>
 		</tfoot>

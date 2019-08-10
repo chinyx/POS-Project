@@ -1,3 +1,5 @@
+document.write('<script type="text/javascript" src="script/underscore-min.js"></script>');
+
 jQuery.fn.tagName=function() {
 	return this.prop('tagName').toLowerCase();
 }
@@ -36,28 +38,52 @@ function openFile(){
 function Page(){
 	this.pageData = {};
 	this.setData = function(data){
-		console.log('this',this);
+		console.log('setData',data);
 		for(let ele in data){
 			this.pageData[ele]=data[ele];
 		}
 		this.render();
-	}
+	};
+	this.getData = function(){
+		return this.pageData;
+	};
 	this.render=function(){
 		console.log('render',this.pageData);
 		let data = this.pageData;
 		for(let ele in data) {
-			let element = $('#'+ele);
-			if(element.length === 0){
+			let $element = $('#'+ele);
+			console.log('element',$element);
+			if($element.length === 0){
 				console.log(`Element not found for id ${ele}`);
 				continue;
 			}
-			//console.log('element',element);
-			if(element.tagName()==='img'){
-				element.attr('src',data[ele]);
-			} else if(element.tagName() === 'p') {
-				element.text(data[ele]);
-			}else {
-				console.log(`Invalid Tag for Element ${ele}: ${element.tagName()}`);
+			if($element.tagName()==='img'){
+				for (let attr in data[ele]){
+					$element.attr(attr,data[ele][attr]);
+				}
+			} else if($element.tagName() === 'table'){
+				const $templateRow = $element.find('[name=templateRow]');
+				if(!$templateRow || $templateRow.length === 0) {
+					alert(`Template Row not Found for Table: #${ele}`);
+				}
+				console.log('template Row',$templateRow);
+				const $clone = $templateRow.clone();
+				const $tbody = $element.find('tbody');
+				$tbody.empty();
+				let lines = data[ele];
+				_.forEach(lines,l=>{
+					let $dataRow = $clone.clone();
+					$dataRow.attr('name','dataRow');
+					console.log('dataRow',$dataRow[0]);
+					for(let replace in l){
+						let re = RegExp(`{${replace}}`,'g')
+						$dataRow.html($dataRow.html().replace(re,l[replace]));
+					}
+					$tbody.append($dataRow);
+				});
+				$tbody.append($clone);
+			} else {
+				$element.text(data[ele]);
 			}
 		}
 	}
