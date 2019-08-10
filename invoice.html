@@ -2,22 +2,94 @@
 <html>
 <head>
 	<title>Print your Invoice in 5 minutes</title>
-	<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-	<script type="text/javascript" src="script/bootstrap.min.js"></script>
-	<script type="text/javascript" src="script/jquery-3.4.1.js"></script>
 </head>
 <body>
-	<header class="container my-3">
-		<img class="d-block mx-auto" src="image/company header.png">
-	</header>
-	<content>
-		<div class="container">
-			
-		</div>
-	</content>
-	<footer>
-		
-	</footer>
+	<table class="w-auto d-block">
+		<thead class="w-auto d-block">
+			<tr class="w-auto d-block">
+				<th id="headerContainer" class="container my-3 d-block mx-auto" style="width: 80%">
+					<img id="headerImage" class="page-header img-fluid d-block mx-auto" src="image/company header.png">
+					<p class="d-print-none small text-center text-info">Double-click on image to change header.</p>
+					<p class="d-block h1 header-text text-center my-3">Invoice Print</p>
+					<div id="infoDiv" class="card card-body bg-light d-print-none">
+						<form id="infoForm" class="d-flex flex-row">
+							<div class="p-2 flex-fill">
+								<div class="form-group">
+									<label for="addressInput"><strong>Billed To:</strong></label><br>
+									<textarea id="addressInput" class="formControl input" placeholder="Enter Address" rows="7" style="width:80%"></textarea>
+								</div>
+							</div>
+							<div class="p-2 flex-fill">
+								<div class="form-group my-3">
+									<label for="numberInput"><strong>Invoice Number:</strong></label><br>
+									<input type="text" id="numberInput" class="formControl input" placeholder="Enter Number" style="width:80%"></input>
+								</div>
+								<div class="form-group">
+									<label for="dateInput"><strong>Issue Date:</strong></label><br>
+									<input type="date" id="dateInput" class="formControl input" placeholder="Enter Date" style="width:80%"></input>
+								</div>
+							</div>
+						</form>
+					</div>
+					<div id="infoDivPrint" class="card card-body bg-light d-none d-print-block">
+						<div id="infoFormPrint" class="d-flex flex-row">
+							<div class="p-2 float-left" style="width:50%">
+								<div>
+									<p><strong>Billed To:</strong></p>
+									<p id="addressValue" class="formControl" rows="7" style="width:80%"></p>
+								</div>
+							</div>
+							<div class="p-2 float-right"style="width:50%">
+								<div class="mb-3">
+									<p class="d-inline"><strong>Invoice Number:</strong></p>
+									<p id="numberValue" class="formControl d-inline" style="width:80%"></p>
+								</div>
+								<div>
+									<p class="d-inline"><strong>Issue Date:</strong></p>
+									<p id="dateValue" class="formControl d-inline" style="width:80%"></p>
+								</div>
+							</div>
+							<div class="float-none"></div>
+						</div>
+					</div>
+				</th>
+			</tr>
+		</thead>
+
+		<tbody class="w-auto d-block">
+			<tr class="w-auto d-block">
+				<td id="content" class="w-auto d-block">
+					<div class="container table-responsive">
+						<table id="lines" class="table table-bordered table-stripped">
+							<thead>
+								<tr>
+									<th style="width: 10%" scope="col">#</th>
+									<th style="width: 20%" scope="col">Description</th>
+									<th style="width: 15%" scope="col">Qty</th>
+									<th style="width: 10%" scope="col">UoM</th>
+									<th style="width: 15%" scope="col">Unit Price</th>
+									<th style="width: 15%" scope="col">Discount</th>
+									<th style="width: 15%" scope="col">Amount</th>
+								</tr>
+							</thead>
+						</table>
+					</div>
+				</td>
+			</tr>
+		</tbody>
+		<tfoot class="w-auto d-block">
+			<tr class="w-auto d-block">
+				<th id="footer">
+					
+				</th>
+			</tr>
+		</tfoot>
+
+	</table>
+	<script type="text/javascript" src="script/jquery-3.4.1.js"></script>
+	<script type="text/javascript" src="script/bootstrap.min.js"></script>
+	<script type="text/javascript" src="script/main.js"></script>
+	<script type="text/javascript" src="script/invoice.js"></script>
 </body>
 </html>
