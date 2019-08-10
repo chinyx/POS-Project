@@ -30,3 +30,10 @@ $('.input').change((e)=>{
 	data[val_id]=val;
 	setData(data);
 });
+
+$(document).keydown(function(e){
+	if(e.ctrlKey && e.key === 'i'){
+		$('#itemForm').modal('show');
+	}
+})
+	

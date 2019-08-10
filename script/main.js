@@ -1,4 +1,4 @@
-document.write('<script type="text/javascript" src="script/underscore-min.js"></script>');
+//document.write('<script type="text/javascript" src="script/underscore-min.js"></script>');
 
 jQuery.fn.tagName=function() {
 	return this.prop('tagName').toLowerCase();
@@ -38,23 +38,36 @@ function openFile(){
 function Page(){
 	this.pageData = {};
 	this.setData = function(data){
+		const _page = this;
 		console.log('setData',data);
 		for(let ele in data){
-			this.pageData[ele]=data[ele];
+			_page.pageData[ele]=data[ele];
 		}
-		this.render();
+		_page.render();
 	};
 	this.getData = function(){
-		return this.pageData;
+		const _page = this;
+		return _page.pageData;
 	};
-	this.render=function(){
-		console.log('render',this.pageData);
-		let data = this.pageData;
+	this.render= function(){
+		const _page = this;
+		console.log('render',page.pageData);
+		let data = page.pageData;
 		for(let ele in data) {
 			let $element = $('#'+ele);
 			console.log('element',$element);
 			if($element.length === 0){
 				console.log(`Element not found for id ${ele}`);
+				let re = RegExp(`{${ele}}`,'g');
+				$(`:not("[name=templateRow]") :contains("{${ele}}")`).each(function(){
+					let _parent = this;
+					if(_parent.children.length===0){
+						_parent.innerText=_parent.innerText.replace(re,data[ele]);
+						console.log('parent',_parent);
+						console.log('page',_page);
+						_page.variables[ele]=_parent;				
+					}
+				});
 				continue;
 			}
 			if($element.tagName()==='img'){
@@ -83,8 +96,12 @@ function Page(){
 				});
 				$tbody.append($clone);
 			} else {
-				$element.text(data[ele]);
+				let re = RegExp(`{${ele}}`,'g')
+				$(':not("[name=templateRow]")').each(function(){
+					$(this).text($(this).text().replace(re,data[ele]));
+				});
 			}
 		}
-	}
+	};
+	this.variables={};
 }

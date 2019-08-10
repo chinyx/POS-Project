@@ -2,14 +2,14 @@
 <html>
 <head>
 	<title>Print your Invoice in 5 minutes</title>
-	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="../../../../css/bootstrap.min.css">
 </head>
 <body>
 	<table class="w-auto d-block">
 		<thead class="w-auto d-block">
 			<tr class="w-auto d-block">
 				<th id="headerContainer" class="container my-3 d-block mx-auto" style="width: 80%">
-					<img id="headerImage" class="page-header img-fluid d-block mx-auto" src="image/company header.png">
+					<img id="headerImage" class="page-header img-fluid d-block mx-auto" src="image/company header.png"data-toggle="tooltip" title="Double-click to change this.">
 					<p class="d-print-none small text-center text-info">Double-click on image to change header.</p>
 					<p class="d-block h1 header-text text-center my-3">Invoice Print</p>
 					<div id="infoDiv" class="card card-body bg-light d-print-none">
@@ -61,7 +61,7 @@
 			<tr class="w-auto d-block">
 				<td id="content" class="w-auto d-block">
 					<div class="container table-responsive">
-						<table id="lines" name="table" class="table table-bordered table-stripped">
+						<table id="lines" name="table" class="table table-bordered table-striped">
 							<thead>
 								<tr>
 									<th style="width: 10%" scope="col">#</th>
@@ -84,7 +84,39 @@
 									<td>{amount}</td>
 								</tr>
 							</tbody>
+							<tfoot class="font-weight-bold">
+								<tr>
+									<td></td>
+									<td>Total:</td>
+									<td>{qtyTotal}</td>
+									<td>{uomTotal}</td>
+									<td></td>
+									<td>{discountTotal}</td>
+									<td>{amountTotal}</td>
+								</tr>
+							</tfoot>
 						</table>
+					
+					<button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#itemForm">Add New Line</button>
+					</div>
+					<div id="itemForm" class="modal" tabindex="-1" role="dialog">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title">Add Product</h5>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body">
+									<p>Modal body text goes here.</p>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-primary">Save changes</button>
+									<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+								</div>
+							</div>
+						</div>
 					</div>
 				</td>
 			</tr>
@@ -98,9 +130,10 @@
 		</tfoot>
 
 	</table>
-	<script type="text/javascript" src="script/jquery-3.4.1.js"></script>
-	<script type="text/javascript" src="script/bootstrap.min.js"></script>
-	<script type="text/javascript" src="script/main.js"></script>
+	<script type="text/javascript" src="../../../../script/jquery-3.4.1.js"></script>
+	<script type="text/javascript" src="../../../../script/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../../../../script/main.js"></script>
+	<script type="text/javascript" src="../../../../script/underscore-min.js"></script>
 	<script type="text/javascript" src="script/invoice.js"></script>
 </body>
 </html>
