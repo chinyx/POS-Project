@@ -36,6 +36,16 @@ function openFile(){
 
 
 function Page(){
+	this.onload=function(){
+		const _page = this;
+		_page.loadVar();
+		let ctx = {};
+		for(let variable in _page.variables){
+			let v = variable.match(/{([^}]*)}/);
+			ctx[v[1]]='';
+		};
+		_page.setVar(ctx);
+	}
 	this.pageData = {};
 	this.setData = function(data){
 		const _page = this;
@@ -55,19 +65,12 @@ function Page(){
 		let data = page.pageData;
 		for(let ele in data) {
 			let $element = $('#'+ele);
-			console.log('element',$element);
+			//console.log('element',$element);
 			if($element.length === 0){
 				console.log(`Element not found for id ${ele}`);
-				let re = RegExp(`{${ele}}`,'g');
-				$(`:not("[name=templateRow]") :contains("{${ele}}")`).each(function(){
-					let _parent = this;
-					if(_parent.children.length===0){
-						_parent.innerText=_parent.innerText.replace(re,data[ele]);
-						console.log('parent',_parent);
-						console.log('page',_page);
-						_page.variables[ele]=_parent;				
-					}
-				});
+				let ctx = {};
+				ctx[ele]=data[ele];
+				_page.setVar(ctx);
 				continue;
 			}
 			if($element.tagName()==='img'){
@@ -96,12 +99,47 @@ function Page(){
 				});
 				$tbody.append($clone);
 			} else {
-				let re = RegExp(`{${ele}}`,'g')
-				$(':not("[name=templateRow]")').each(function(){
-					$(this).text($(this).text().replace(re,data[ele]));
-				});
+				_page.setVar({ele:data[ele]});
 			}
 		}
 	};
 	this.variables={};
+	this.setVar = function(ctx){
+		console.log('setVar',ctx);
+		const _page = this;
+		for(variable in ctx){
+			let ele = _page.variables[`{${variable}}`].element;
+			if(ele){
+				let re = RegExp(`{${variable}}`,'g')
+				ele.innerText = _page.variables[`{${variable}}`].value.replace(re,ctx[variable]);
+			}
+		}
+	}
+	this.loadVar = function(){
+		const _page = this;
+		let templateRowsArray = [];
+		let $templateRows = $('[name=templateRow]');
+		$templateRows.each(function(){
+			let parent = $(this).parent();
+			let child = $(this);
+			templateRowsArray.push({parent:parent,child:child});
+			$(this).detach();
+		});
+		//console.log('templateRows',templateRowsArray);
+		$(`:not("[name=templateRow]") :contains("{")`).each(function(){
+			let _parent = this;
+			if(_parent.children.length===0 && $(_parent).tagName()!=='script'){
+				let ele=_parent.innerText.match(/{([^}]*)}/g);
+				if(ele && ele.length != 0) {
+					ele.forEach(o=>{
+						_page.variables[o]={element:_parent,value:_parent.innerText};
+					})
+				}
+			}
+		});
+		templateRowsArray.forEach(function(e){
+			e.child.appendTo(e.parent);
+		});
+		console.log('loadVar',_page.variables);
+	}
 }
