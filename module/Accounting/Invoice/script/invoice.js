@@ -1,6 +1,6 @@
 const page = new Page();
 const getData = function(){
-	return page.getData;
+	return page.getData();
 }
 const setData = function(data){
 	return page.setData(data);
@@ -35,5 +35,9 @@ $(document).keydown(function(e){
 	if(e.ctrlKey && e.key === 'i'){
 		$('#itemForm').modal('show');
 	}
+})
+
+$('#itemModal').on('shown.bs.modal',function(){
+	$('#descriptionInput').focus();
 })
 	

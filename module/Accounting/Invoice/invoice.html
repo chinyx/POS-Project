@@ -69,7 +69,7 @@
 									<th style="width: 15%" scope="col">Qty</th>
 									<th style="width: 10%" scope="col">UoM</th>
 									<th style="width: 15%" scope="col">Unit Price</th>
-									<th style="width: 15%" scope="col">Discount</th>
+									<th style="width: 15%" scope="col">Discount / Unit</th>
 									<th style="width: 15%" scope="col">Amount</th>
 								</tr>
 							</thead>
@@ -96,11 +96,11 @@
 								</tr>
 							</tfoot>
 						</table>
-					
-					<button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#itemForm">Add New Line</button>
+
+						<button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#itemForm">Add New Line (Ctrl + I)</button>
 					</div>
 					<div id="itemForm" class="modal" tabindex="-1" role="dialog">
-						<div class="modal-dialog" role="document">
+						<div class="modal-dialog modal-lg" role="document">
 							<div class="modal-content">
 								<div class="modal-header">
 									<h5 class="modal-title">Add Product</h5>
@@ -108,8 +108,35 @@
 										<span aria-hidden="true">&times;</span>
 									</button>
 								</div>
-								<div class="modal-body">
-									<p>Modal body text goes here.</p>
+								<div class="modal-body" id="itemModal">
+									<div id="infoDiv" class="bg-light d-print-none">
+										<form id="infoForm" class="d-flex flex-row">
+											<div class="p-2" style="width:50%">
+												<div class="form-group">
+													<label for="descriptionInput"><strong>Description</strong></label><br>
+													<textarea id="descriptionInput" class="formControl input" placeholder="Enter Description" rows="5" style="width:100%" autofocus="true"></textarea>
+												</div>
+											</div>
+											<div class="p-2" style="width:50%">
+												<div class="form-group">
+													<label for="qtyInput"><strong>Qty:</strong></label>
+													<input type="number" id="qtyInput" class="formControl input float-right" placeholder="Enter Qty" style="width:60%" step="any"></input>
+												</div>
+												<div class="form-group">
+													<label for="uomInput"><strong>UoM:</strong></label>
+													<input type="text" id="uomInput" class="formControl input float-right" placeholder="Enter UoM" style="width:60%"></input>
+												</div>
+												<div class="form-group">
+													<label for="unitPriceInput"><strong>Unit Price:</strong></label>
+													<input type="number" id="unitPriceInput" class="formControl input float-right" placeholder="Enter Unit Price" style="width:60%" step="any"></input>
+												</div>
+												<div class="form-group">
+													<label for="discountInput"><strong>Discount per Unit:</strong></label>
+													<input type="number" id="discountInput" class="formControl input float-right" placeholder="Enter Discount" style="width:60%" step="any"></input>
+												</div>
+											</div>
+										</form>
+									</div>
 								</div>
 								<div class="modal-footer">
 									<button type="button" class="btn btn-primary">Save changes</button>

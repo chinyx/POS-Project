@@ -108,10 +108,12 @@ function Page(){
 		console.log('setVar',ctx);
 		const _page = this;
 		for(variable in ctx){
-			let ele = _page.variables[`{${variable}}`].element;
-			if(ele){
-				let re = RegExp(`{${variable}}`,'g')
-				ele.innerText = _page.variables[`{${variable}}`].value.replace(re,ctx[variable]);
+			let elements = _page.variables[`{${variable}}`];
+			if(elements){
+				elements.forEach(ele=>{
+					let re = RegExp(`{${variable}}`,'g')
+					ele.element.innerText = ele.value.replace(re,ctx[variable]);
+				})	
 			}
 		}
 	}
@@ -129,10 +131,11 @@ function Page(){
 		$(`:not("[name=templateRow]") :contains("{")`).each(function(){
 			let _parent = this;
 			if(_parent.children.length===0 && $(_parent).tagName()!=='script'){
-				let ele=_parent.innerText.match(/{([^}]*)}/g);
-				if(ele && ele.length != 0) {
-					ele.forEach(o=>{
-						_page.variables[o]={element:_parent,value:_parent.innerText};
+				let elements=_parent.innerText.match(/{([^}]*)}/g);
+				if(elements && elements.length != 0) {
+					elements.forEach(o=>{
+						if(!_page.variables[o])_page.variables[o]=[];
+						_page.variables[o].push({element:_parent,value:_parent.innerText});
 					})
 				}
 			}
