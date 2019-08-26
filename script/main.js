@@ -61,8 +61,8 @@ function Page(){
 	};
 	this.render= function(){
 		const _page = this;
-		console.log('render',page.pageData);
-		let data = page.pageData;
+		console.log('render',_page.pageData);
+		let data = _page.pageData;
 		for(let ele in data) {
 			let $element = $('#'+ele);
 			//console.log('element',$element);
@@ -90,6 +90,7 @@ function Page(){
 				_.forEach(lines,l=>{
 					let $dataRow = $clone.clone();
 					$dataRow.attr('name','dataRow');
+					$dataRow.removeClass('d-none d-print-none');
 					console.log('dataRow',$dataRow[0]);
 					for(let replace in l){
 						let re = RegExp(`{${replace}}`,'g')

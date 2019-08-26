@@ -3,6 +3,7 @@
 <head>
 	<title>Print your Invoice in 5 minutes</title>
 	<link rel="stylesheet" type="text/css" href="../../../../css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/custom css.css">
 </head>
 <body>
 	<table class="w-auto d-block">
@@ -17,17 +18,17 @@
 							<div class="p-2 flex-fill">
 								<div class="form-group">
 									<label for="addressInput"><strong>Billed To:</strong></label><br>
-									<textarea id="addressInput" class="formControl input" placeholder="Enter Address" rows="7" style="width:80%"></textarea>
+									<textarea id="addressInput" class="formControl input infoInput" placeholder="Enter Address" rows="7" style="width:80%"></textarea>
 								</div>
 							</div>
 							<div class="p-2 flex-fill">
 								<div class="form-group my-3">
 									<label for="numberInput"><strong>Invoice Number:</strong></label><br>
-									<input type="text" id="numberInput" class="formControl input" placeholder="Enter Number" style="width:80%"></input>
+									<input type="text" id="numberInput" class="formControl input infoInput" placeholder="Enter Number" style="width:80%"></input>
 								</div>
 								<div class="form-group">
 									<label for="dateInput"><strong>Issue Date:</strong></label><br>
-									<input type="date" id="dateInput" class="formControl input" placeholder="Enter Date" style="width:80%"></input>
+									<input type="date" id="dateInput" class="formControl input infoInput" placeholder="Enter Date" style="width:80%"></input>
 								</div>
 							</div>
 						</form>
@@ -74,7 +75,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr name="templateRow" class="">
+								<tr name="templateRow" class="d-print-none d-none">
 									<td>{seq}</td>
 									<td>{description}</td>
 									<td>{qty}</td>
@@ -89,7 +90,7 @@
 									<td></td>
 									<td>Total:</td>
 									<td>{qtyTotal}</td>
-									<td>{uomTotal}</td>
+									<td></td>
 									<td></td>
 									<td>{discountTotal}</td>
 									<td>{amountTotal}</td>
@@ -97,7 +98,7 @@
 							</tfoot>
 						</table>
 
-						<button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#itemForm">Add New Line (Ctrl + I)</button>
+						<button type="button" class="btn btn-sm btn-primary d-print-none" data-toggle="modal" data-target="#itemForm">Add New Line (Ctrl + I)</button>
 					</div>
 					<div id="itemForm" class="modal" tabindex="-1" role="dialog">
 						<div class="modal-dialog modal-lg" role="document">
@@ -139,7 +140,7 @@
 									</div>
 								</div>
 								<div class="modal-footer">
-									<button type="button" class="btn btn-primary">Save changes</button>
+									<button type="button" class="btn btn-primary" onclick="addLine()">Add Line</button>
 									<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 								</div>
 							</div>

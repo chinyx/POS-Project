@@ -1,0 +1,14 @@
+div#headerContainer{
+    display: block; text-align: center; 
+    position: running(header);
+}
+div.footer {
+    display: block; text-align: center;
+    position: running(footer);
+}
+@page {
+    @top-center { content: element(header) }
+}
+@page { 
+    @bottom-center { content: element(footer) }
+}
