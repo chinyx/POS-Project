@@ -37,7 +37,8 @@ function addLine(){
 	data.discountTotal=(discountTotal+(qty*discount)).toFixed(2);
 	data.amountTotal=(amountTotal+amount).toFixed(2);
 	setData();
-	$('#itemForm').modal('hide');
+	$('#itemFormDiv').modal('hide');
+	$('#itemForm')[0].reset();
 }
 
 $(document).ready(()=>{
@@ -69,14 +70,14 @@ $(document).ready(()=>{
 
 	$(document).keydown(function(e){
 		if(e.ctrlKey && e.key === 'i'){
-			$('#itemForm').modal('show');
+			$('#itemFormDiv').modal('show');
 		}
 	});
 
 	$('#itemModal').on('shown.bs.modal',function(){
 		$('#descriptionInput').focus();
 	});
-	$('#itemForm').on('keydown',function(e){
+	$('#itemFormDiv').on('keydown',function(e){
 		console.log('shift:',e.shiftKey,'key',e.key);
 		if(!e.shiftKey && e.key === 'Enter'){
 			addLine();

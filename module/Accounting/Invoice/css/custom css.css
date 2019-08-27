@@ -1,4 +1,4 @@
-div#headerContainer{
+/*div#headerContainer{
     display: block; text-align: center; 
     position: running(header);
 }
@@ -11,4 +11,4 @@ div.footer {
 }
 @page { 
     @bottom-center { content: element(footer) }
-}
+}*/
